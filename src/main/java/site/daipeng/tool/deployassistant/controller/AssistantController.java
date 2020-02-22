@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,11 +25,8 @@ public class AssistantController {
 
     @GetMapping("")
     public String deploy(@RequestParam(required = false, defaultValue = "") String script) throws  Exception {
-        String runScript = defaultScript;
-        if (!StringUtils.isEmpty(script)) {
-            runScript = script;
-        }
-        final  Process process = Runtime.getRuntime().exec(defaultScript);
+        String runScript = StringUtils.isEmpty(script) ? defaultScript : script;
+        final  Process process = Runtime.getRuntime().exec(runScript);
 
         es.submit(() -> {
             try {
