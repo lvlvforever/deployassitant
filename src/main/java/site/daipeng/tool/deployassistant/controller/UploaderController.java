@@ -24,7 +24,7 @@ public class UploaderController {
     public Map<String, Object> uploadMultiFile(MultipartFile file) {
         Map<String, Object> data = new HashMap<>();
         System.err.println(file);
-        String fileName = System.currentTimeMillis() + "";
+        String fileName = System.currentTimeMillis() + ".jpg";
         File dest = new File(dir + File.separator + fileName);
         try (InputStream inputStream = file.getInputStream()) {
             FileUtils.copyToFile(inputStream, dest);
