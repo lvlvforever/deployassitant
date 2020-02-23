@@ -1,10 +1,7 @@
 package site.daipeng.tool.deployassistant.controller;
 
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,11 +16,11 @@ import java.util.concurrent.Executors;
 @RestController
 @RequestMapping("deploy")
 public class AssistantController {
-    private String defaultScript = "~/start.sh";
+    private String defaultScript = "/root/start.sh";
 
     private ExecutorService es = Executors.newFixedThreadPool(10);
 
-    @GetMapping("")
+    @PostMapping("")
     public String deploy(@RequestParam(required = false, defaultValue = "") String script) throws  Exception {
         String runScript = StringUtils.isEmpty(script) ? defaultScript : script;
         final  Process process = Runtime.getRuntime().exec(runScript);
