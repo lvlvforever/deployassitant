@@ -19,9 +19,11 @@ import java.util.Map;
 public class UploaderController {
     @Value("${file.upload.dir}")
     private String dir;
-    @CrossOrigin
+
+    @CrossOrigin(allowCredentials = "true", maxAge = 3600)
     @PostMapping(value = "/upload")
     public Map<String, Object> uploadMultiFile(MultipartFile file) {
+
         Map<String, Object> data = new HashMap<>();
         System.err.println(file);
         String fileName = System.currentTimeMillis() + ".jpg";
